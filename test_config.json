@@ -6,10 +6,7 @@
         "requires_py_version": 3
     },
     {
-        "force_min_processes": 1,
-        "path": "tests/local_msg.py"
-    },
-    {
+        "force_min_processes": 4,
         "path": "tests/entry_methods/array_element_proxy.py"
     },
     {
