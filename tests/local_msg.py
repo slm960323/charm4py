@@ -17,6 +17,7 @@ class Main(Chare):
         elem.recv(self.data)
 
     def done(self):
+        print("Main :: data[0] = {}".format(self.data[0]))
         assert(self.data[0] == 0)
         exit()
 
