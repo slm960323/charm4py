@@ -1,6 +1,7 @@
 name: Charm4py
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -21,10 +22,16 @@ jobs:
         git clone https://github.com/UIUC-PPL/charm charm_src/charm
         export CHARM_EXTRA_BUILD_OPTS="--enable-error-checking"
         export CHARM_BUILD_PROCESSES=2
-        export CHARM4PY_BUILD_CFFI=1
         python3 setup.py build_ext --inplace
+        export PYTHONPATH="$PWD"
     - name: test-charm4py
       run: |
+        git clone https://github.com/slm960323/task-bench.git
+        cd task-bench
+        cd core
+        make -j2
+        export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
+        cd ../../
         export PYTHONPATH="$PWD"
         export CHARM4PY_TEST_NUM_PROCESSES=2
         python3 auto_test.py
